@@ -39,7 +39,11 @@ public class MusicAccountRetriever {
 
         for (Future<AmazonMusicAccount> result : results) {
             //PARTICIPANTS: replace the following line.
-            accountList.add(new AmazonMusicAccount("Null", 0, "Null"));
+            try {
+                accountList.add(result.get());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         accountExecutor.shutdown();
